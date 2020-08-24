@@ -6,8 +6,7 @@ import time
 from selenium import webdriver
 
 def init_browser():
-    executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    browser = Browser("chrome", executable_path="chromedriver", headless=True)
 def scrape():
     browser = init_browser()
     #scraping the news
