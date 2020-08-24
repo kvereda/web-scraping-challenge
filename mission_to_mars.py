@@ -6,8 +6,8 @@ import time
 from selenium import webdriver
 
 def init_browser():
-    executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    browser = Browser("chrome", executable_path="chromedriver", headless=True)
+    
 def scrape():
     browser = init_browser()
     #scraping the news
@@ -16,8 +16,8 @@ def scrape():
     html = browser.html
     news_soup = bs(html, "html.parser")
     news_data = news_soup.find("li", class_="slide")
-    news_title = news_data.find_all('div', class_='content_title').a.text
-    news_p = news_data.find_all('div', class_='article_teaser_body').text
+    news_title = news_data.find_all('div', class_='content_title')[0].text
+    news_p = news_data.find_all('div', class_='article_teaser_body')[0].text
 
     #scraping images
     img_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
